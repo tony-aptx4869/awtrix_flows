@@ -11,13 +11,19 @@ https://flows.blueforcer.de/flow/RJM9oLYlOLzX
 `github.json`  
 Shows your GitHub followers count.
 
+## Twitter
+TODO...
+
+## Youtube
+`youtube.json`  
+Shows your Youtube channel subscribers count.
+
+## Weather
+`openweather.json`  
+Shows your current weather. Powered by OpenWeatherMap.org
+
 ## Animations
 `animations.json`  
 Shows 5 random animations for your Awtrix Light.  
 You could also modify whatever you want.
 
-## Twitter
-TODO...
-
-## Weather
-TODO...

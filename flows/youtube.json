@@ -1,0 +1,176 @@
+[
+    {
+        "id": "04b1d8bfb8c35838",
+        "type": "group",
+        "z": "a823e83bee123784",
+        "name": "Youtube Subscriber",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "9af3a44a96fe0ec2",
+            "62a6741d00f122da",
+            "99a6cef1215cdaea",
+            "d3e6c459070dfbe6",
+            "e93fde625df6e9d3",
+            "235473038f56eb0b"
+        ],
+        "x": 34,
+        "y": 159,
+        "w": 892,
+        "h": 122
+    },
+    {
+        "id": "9af3a44a96fe0ec2",
+        "type": "inject",
+        "z": "a823e83bee123784",
+        "g": "04b1d8bfb8c35838",
+        "name": "1x/10min",
+        "props": [],
+        "repeat": "600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "235473038f56eb0b"
+            ]
+        ]
+    },
+    {
+        "id": "62a6741d00f122da",
+        "type": "http request",
+        "z": "a823e83bee123784",
+        "g": "04b1d8bfb8c35838",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "https://youtube.googleapis.com/youtube/v3/channels",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "User-Agent",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"
+            }
+        ],
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "99a6cef1215cdaea"
+            ]
+        ]
+    },
+    {
+        "id": "99a6cef1215cdaea",
+        "type": "function",
+        "z": "a823e83bee123784",
+        "g": "04b1d8bfb8c35838",
+        "name": "parser",
+        "func": "var json = msg.payload;\nvar subscriberCount = String(json.items[0].statistics.subscriberCount);\n\nmsg.payload = {\"text\": subscriberCount, \"icon\": \"youtube\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "d3e6c459070dfbe6"
+            ]
+        ]
+    },
+    {
+        "id": "d3e6c459070dfbe6",
+        "type": "mqtt out",
+        "z": "a823e83bee123784",
+        "g": "04b1d8bfb8c35838",
+        "name": "",
+        "topic": "awtrixlight/custom/youtube",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "346df2a95aac5785",
+        "x": 800,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e93fde625df6e9d3",
+        "type": "comment",
+        "z": "a823e83bee123784",
+        "g": "04b1d8bfb8c35838",
+        "name": "Youtube Subscriber",
+        "info": "Just enter your **Channel ID** and **Youtube API key** in the **[Data]** node and set your **AWTRIX MQTT** prefix.  \nUses Icon 'youtube'.",
+        "x": 170,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "235473038f56eb0b",
+        "type": "function",
+        "z": "a823e83bee123784",
+        "g": "04b1d8bfb8c35838",
+        "name": "Data",
+        "func": "msg.payload = { \"id\": \"UCdxkMbirTsG0G63x3QUU8rg\", \"key\": \"PUT_YOUR_YOUTUBE_API_KEY_HERE\", \"part\":\"statistics\"}\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "62a6741d00f122da"
+            ]
+        ]
+    },
+    {
+        "id": "346df2a95aac5785",
+        "type": "mqtt-broker",
+        "name": "awtrixlight_mqtt_r5s",
+        "broker": "10.10.10.250",
+        "port": "1883",
+        "tls": "",
+        "clientid": "nodered_docker",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "600",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

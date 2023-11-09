@@ -1,0 +1,639 @@
+[
+    {
+        "id": "ca7145a23c4bca5e",
+        "type": "group",
+        "z": "3cc8e6fdcc97f360",
+        "name": "App: OpenWeatherMap",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "8476bfc4c908c2bf",
+            "90974004d8606f10",
+            "d7fbcf23f4184555",
+            "4a271047de8e03c2",
+            "b05f3ccaa15e0655",
+            "73cc5f5c72407fc9",
+            "32fc48fca38fef85",
+            "f35c20726631bfb1",
+            "390a639927abbf27",
+            "eb06b61b77fce23a",
+            "03568635746c610c",
+            "6d2ce111404ea376",
+            "35d9dd9696f5f739",
+            "eaf0a5c493d94b9e",
+            "3652b0fee428031e",
+            "6fbc8018f583e754",
+            "3cfa53355a57d9f6",
+            "e4087a1fb0a1523a",
+            "379851f7d07bbeb6",
+            "79c4af5a82595d05",
+            "5189a6c0740f772d",
+            "7a9e8fbc30505d3f"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 1312,
+        "h": 662
+    },
+    {
+        "id": "8476bfc4c908c2bf",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Weather: Clear Sky (Day)",
+        "func": "var temperature = msg.payload.tempc;\nvar humidity = msg.payload.humidity;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 2282,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 60,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "90974004d8606f10",
+        "type": "switch",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Weather Situation",
+        "property": "payload.icon",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "01d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "01n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "02d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "02n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "03d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "03n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "04d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "04n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "09d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "09n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "10d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "10n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "11d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "11n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "13d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "13n",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "50d",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "50n",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 18,
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "8476bfc4c908c2bf"
+            ],
+            [
+                "d7fbcf23f4184555"
+            ],
+            [
+                "b05f3ccaa15e0655"
+            ],
+            [
+                "4a271047de8e03c2"
+            ],
+            [
+                "32fc48fca38fef85"
+            ],
+            [
+                "73cc5f5c72407fc9"
+            ],
+            [
+                "f35c20726631bfb1"
+            ],
+            [
+                "f35c20726631bfb1"
+            ],
+            [
+                "390a639927abbf27"
+            ],
+            [
+                "390a639927abbf27"
+            ],
+            [
+                "eb06b61b77fce23a"
+            ],
+            [
+                "eb06b61b77fce23a"
+            ],
+            [
+                "03568635746c610c"
+            ],
+            [
+                "03568635746c610c"
+            ],
+            [
+                "6d2ce111404ea376"
+            ],
+            [
+                "6d2ce111404ea376"
+            ],
+            [
+                "35d9dd9696f5f739"
+            ],
+            [
+                "35d9dd9696f5f739"
+            ]
+        ]
+    },
+    {
+        "id": "d7fbcf23f4184555",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Clear Sky (Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 12181,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 100,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "4a271047de8e03c2",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Partly Cloudy (Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 53384,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 180,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "b05f3ccaa15e0655",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Partly Cloudy (Day)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 53802,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 140,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "73cc5f5c72407fc9",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Cloudy (Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 53384,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 260,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "32fc48fca38fef85",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Cloudy (Day)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 53802,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 220,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "f35c20726631bfb1",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Very Cloudy (Day/Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 53384,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 300,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "390a639927abbf27",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Rain Shower (Day/Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 49300,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "eb06b61b77fce23a",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Rain (Day/Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 2284,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 380,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "03568635746c610c",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Thunderstorm (Day/Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 49299,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 420,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "6d2ce111404ea376",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Snow (Day/Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 2289,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "35d9dd9696f5f739",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Fog (Day/Night)",
+        "func": "var temperature = msg.payload.tempc;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 17055,\n    \"text\": temperature + \"°\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 500,
+        "wires": [
+            [
+                "3652b0fee428031e"
+            ]
+        ]
+    },
+    {
+        "id": "eaf0a5c493d94b9e",
+        "type": "function",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Humidity",
+        "func": "var humidity = msg.payload.humidity;\n\nmsg.payload = {\n    \"repeat\": 1,\n    \"icon\": 2423,\n    \"text\": humidity + \"%\"\n    };\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 560,
+        "wires": [
+            [
+                "6fbc8018f583e754"
+            ]
+        ]
+    },
+    {
+        "id": "3652b0fee428031e",
+        "type": "http request",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "AwtrixLight/CustomApp",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.10/api/custom?name=weather",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 1190,
+        "y": 300,
+        "wires": [
+            []
+        ],
+        "icon": "font-awesome/fa-align-left"
+    },
+    {
+        "id": "6fbc8018f583e754",
+        "type": "http request",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "AwtrixLight/CustomApp",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.10/api/custom?name=humid",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 1190,
+        "y": 560,
+        "wires": [
+            []
+        ],
+        "icon": "font-awesome/fa-align-left"
+    },
+    {
+        "id": "3cfa53355a57d9f6",
+        "type": "junction",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "x": 320,
+        "y": 560,
+        "wires": [
+            [
+                "eaf0a5c493d94b9e"
+            ]
+        ]
+    },
+    {
+        "id": "e4087a1fb0a1523a",
+        "type": "openweathermap in",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Beijing Weather",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "Beijing",
+        "country": "China",
+        "language": "en",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "90974004d8606f10",
+                "3cfa53355a57d9f6"
+            ]
+        ]
+    },
+    {
+        "id": "379851f7d07bbeb6",
+        "type": "debug",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Weather JSON Data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "79c4af5a82595d05",
+        "type": "inject",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Manual Retrieval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "tc001/custom/weather",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 640,
+        "wires": [
+            [
+                "5189a6c0740f772d"
+            ]
+        ]
+    },
+    {
+        "id": "5189a6c0740f772d",
+        "type": "openweathermap",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "Beijing Weather",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "Beijing",
+        "country": "China",
+        "language": "en",
+        "x": 400,
+        "y": 640,
+        "wires": [
+            [
+                "379851f7d07bbeb6"
+            ]
+        ]
+    },
+    {
+        "id": "7a9e8fbc30505d3f",
+        "type": "comment",
+        "z": "3cc8e6fdcc97f360",
+        "g": "ca7145a23c4bca5e",
+        "name": "OpenWeatherMap",
+        "info": "First, you may install the moudle `node-red-node-openweathermap`  \nURL for that: https://flows.nodered.org/node/node-red-node-openweathermap\n\nThen you could edit the two nodes named `Beijing Weather`, set information for your own.  \nAs for API key, you may visit https://openweathermap.org/ to get one.",
+        "x": 130,
+        "y": 60,
+        "wires": []
+    }
+]
