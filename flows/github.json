@@ -1,0 +1,154 @@
+[
+    {
+        "id": "cd9bb4e0c3c6971d",
+        "type": "group",
+        "z": "a823e83bee123784",
+        "name": "GirHub Follower",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ce24b1f33cdbd048",
+            "fb0281113afbc4a8",
+            "2382c11ca702285b",
+            "4728feaaf89d283f",
+            "2cb0bcc107c4cea3"
+        ],
+        "x": 34,
+        "y": 299,
+        "w": 892,
+        "h": 122
+    },
+    {
+        "id": "ce24b1f33cdbd048",
+        "type": "inject",
+        "z": "a823e83bee123784",
+        "g": "cd9bb4e0c3c6971d",
+        "name": "1x/30min",
+        "props": [],
+        "repeat": "1800",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1.5",
+        "topic": "",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "fb0281113afbc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "fb0281113afbc4a8",
+        "type": "http request",
+        "z": "a823e83bee123784",
+        "g": "cd9bb4e0c3c6971d",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://github.com/tony-aptx4869",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "User-Agent",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"
+            }
+        ],
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "2382c11ca702285b"
+            ]
+        ]
+    },
+    {
+        "id": "2382c11ca702285b",
+        "type": "function",
+        "z": "a823e83bee123784",
+        "g": "cd9bb4e0c3c6971d",
+        "name": "parser",
+        "func": "const regex = /<span class=\"text-bold color-fg-default\">(\\d+\\.?\\d*[mkMK]?)<\\/span>([\\n ]*)followers([\\n ]*)<\\/a>/;\nconst match = regex.exec(msg.payload);\nif (match) {\n    const followerCount = String(match[1]);\n    msg.payload = followerCount;\n} else {\n    msg.payload = \"N/A\";\n}\n\nmsg.payload = { \"text\": String(msg.payload), \"icon\": \"github_blink\" };\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "4728feaaf89d283f"
+            ]
+        ]
+    },
+    {
+        "id": "4728feaaf89d283f",
+        "type": "mqtt out",
+        "z": "a823e83bee123784",
+        "g": "cd9bb4e0c3c6971d",
+        "name": "",
+        "topic": "tc001/custom/github",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "346df2a95aac5785",
+        "x": 800,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2cb0bcc107c4cea3",
+        "type": "comment",
+        "z": "a823e83bee123784",
+        "g": "cd9bb4e0c3c6971d",
+        "name": "GirHub Follower",
+        "info": "Login github.com  \nGo to your own profile page  \nCopy the URL of the page  \nPaste in the 'http request' node",
+        "x": 160,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "346df2a95aac5785",
+        "type": "mqtt-broker",
+        "name": "awtrixlight_mqtt",
+        "broker": "10.10.10.250",
+        "port": "1883",
+        "tls": "",
+        "clientid": "nodered_docker",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "600",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

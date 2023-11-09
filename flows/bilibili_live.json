@@ -1,0 +1,154 @@
+[
+    {
+        "id": "9b8c810178ede8d8",
+        "type": "group",
+        "z": "a888e88bee123788",
+        "name": "Bilibili Live or Follower",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "7e885ff03883b110",
+            "7d42d886c6fbbb53",
+            "3228801069dd31f9",
+            "06fad6e7d19888a5",
+            "d9decd88e75c88c9"
+        ],
+        "x": 74,
+        "y": 59,
+        "w": 892,
+        "h": 122
+    },
+    {
+        "id": "7e885ff03883b110",
+        "type": "inject",
+        "z": "a888e88bee123788",
+        "g": "9b8c810178ede8d8",
+        "name": "1x/min",
+        "props": [],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "7d42d886c6fbbb53"
+            ]
+        ]
+    },
+    {
+        "id": "7d42d886c6fbbb53",
+        "type": "http request",
+        "z": "a888e88bee123788",
+        "g": "9b8c810178ede8d8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.live.bilibili.com/room/v1/Room/get_info?room_id=[PUT_YOUR_ROOM_ID_HERE]",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "User-Agent",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"
+            }
+        ],
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "3228801069dd31f9"
+            ]
+        ]
+    },
+    {
+        "id": "3228801069dd31f9",
+        "type": "function",
+        "z": "a888e88bee123788",
+        "g": "9b8c810178ede8d8",
+        "name": "parser",
+        "func": "var json = msg.payload;\nvar follower = String(json.data.attention);\nvar viewer = String(json.data.online);\nvar isLiving = false;\nif (json.data.live_status == 1) {\n    isLiving = true;\n}\n\nmsg.payload = {\"text\": follower, \"icon\": \"bilibiliblink\"};\nif (isLiving) {\n    msg.payload = {\"text\": viewer, \"icon\": \"bilibililive\"};\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "06fad6e7d19888a5"
+            ]
+        ]
+    },
+    {
+        "id": "06fad6e7d19888a5",
+        "type": "mqtt out",
+        "z": "a888e88bee123788",
+        "g": "9b8c810178ede8d8",
+        "name": "",
+        "topic": "awtrixlight/custom/bilibili",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "346df2a95aac5785",
+        "x": 840,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d9decd88e75c88c9",
+        "type": "comment",
+        "z": "a888e88bee123788",
+        "g": "9b8c810178ede8d8",
+        "name": "Bilibili Live or Follower",
+        "info": "Go to https://live.bilibili.com/\nOpen your live room\nFind the 'room_id' in the URL 'https://live.bilibili.com/**room_id**'\nCopy that and enter your 'room_id' in the URL in the 'http request' node",
+        "x": 220,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "346df2a95aac5785",
+        "type": "mqtt-broker",
+        "name": "awtrixlight_mqtt",
+        "broker": "10.10.10.250",
+        "port": "1883",
+        "tls": "",
+        "clientid": "nodered_docker",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "600",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

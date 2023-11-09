@@ -1,0 +1,640 @@
+[
+    {
+        "id": "281657d3e010620c",
+        "type": "group",
+        "z": "52b8ba9ae103ac30",
+        "name": "App: Animations",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "b9ac6da7e779d9df",
+            "7fd6d7c709b13065",
+            "d8ab3092121d96bf",
+            "a11f44bd025a5890",
+            "5a3eede6f49a9b03",
+            "4dc2c2ae3a11bf93",
+            "9f744ab053a1214f",
+            "1e4e4ff1cdcc8a16",
+            "05ed5a08ede7121d",
+            "e2ad83ad153c6ac6",
+            "739cdc60b9355c6f",
+            "27e966e9fb737294",
+            "7436e167ce6cc2c0",
+            "a2070e77b811c524",
+            "3581db05c916f4a1",
+            "c714da089f6ff6ef",
+            "9072166da8071e04",
+            "c7d230269521f6f5",
+            "e0bc8c3ddf95bc31",
+            "bf1c74914652882f",
+            "416326d138d212cc",
+            "401b2515224d64c8",
+            "2bd46299b553724e",
+            "ff4e802609517b4b",
+            "b803f4e31fae3e86"
+        ],
+        "x": 54,
+        "y": 39,
+        "w": 1152,
+        "h": 762
+    },
+    {
+        "id": "b9ac6da7e779d9df",
+        "type": "http request",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Awtrix Animes",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.192/api/effects",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 440,
+        "y": 760,
+        "wires": [
+            [
+                "d8ab3092121d96bf"
+            ]
+        ]
+    },
+    {
+        "id": "7fd6d7c709b13065",
+        "type": "inject",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Get Awtrix Animes",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 760,
+        "wires": [
+            [
+                "b9ac6da7e779d9df"
+            ]
+        ]
+    },
+    {
+        "id": "d8ab3092121d96bf",
+        "type": "debug",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a11f44bd025a5890",
+        "type": "function",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Awtrix Random Anime",
+        "func": "var effectsList = msg.effectsList;\nvar countedEffects = effectsList.length;\nvar randomNumber = Math.round(Math.random() * countedEffects);\nvar randomEffect = effectsList[randomNumber];\n\nmsg.payload = { \"effect\": randomEffect };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "4dc2c2ae3a11bf93"
+            ]
+        ]
+    },
+    {
+        "id": "5a3eede6f49a9b03",
+        "type": "inject",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "1x/2min",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "120",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "tc001/custom/anime",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "b803f4e31fae3e86"
+            ]
+        ]
+    },
+    {
+        "id": "4dc2c2ae3a11bf93",
+        "type": "http request",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http request anime-1",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.192/api/custom?name=anime-1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 800,
+        "y": 140,
+        "wires": [
+            [
+                "05ed5a08ede7121d",
+                "bf1c74914652882f"
+            ]
+        ]
+    },
+    {
+        "id": "9f744ab053a1214f",
+        "type": "function",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Awtrix Random Anime",
+        "func": "var effectsList = msg.effectsList;\nvar countedEffects = effectsList.length;\nvar randomNumber = Math.round(Math.random() * countedEffects);\nvar randomEffect = effectsList[randomNumber];\n\nmsg.payload = { \"effect\": randomEffect };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 260,
+        "wires": [
+            [
+                "1e4e4ff1cdcc8a16"
+            ]
+        ]
+    },
+    {
+        "id": "1e4e4ff1cdcc8a16",
+        "type": "http request",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http request anime-3",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.192/api/custom?name=anime-3",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 800,
+        "y": 260,
+        "wires": [
+            [
+                "e2ad83ad153c6ac6",
+                "416326d138d212cc"
+            ]
+        ]
+    },
+    {
+        "id": "05ed5a08ede7121d",
+        "type": "debug",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http response anime-1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e2ad83ad153c6ac6",
+        "type": "debug",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http response anime-3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "739cdc60b9355c6f",
+        "type": "function",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Awtrix Random Anime",
+        "func": "var effectsList = msg.effectsList;\nvar countedEffects = effectsList.length;\nvar randomNumber = Math.round(Math.random() * countedEffects);\nvar randomEffect = effectsList[randomNumber];\n\nmsg.payload = { \"effect\": randomEffect };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 380,
+        "wires": [
+            [
+                "27e966e9fb737294"
+            ]
+        ]
+    },
+    {
+        "id": "27e966e9fb737294",
+        "type": "http request",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http request anime-5",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.192/api/custom?name=anime-5",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 800,
+        "y": 380,
+        "wires": [
+            [
+                "7436e167ce6cc2c0",
+                "401b2515224d64c8"
+            ]
+        ]
+    },
+    {
+        "id": "7436e167ce6cc2c0",
+        "type": "debug",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http response anime-5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a2070e77b811c524",
+        "type": "function",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Awtrix Random Anime",
+        "func": "var effectsList = msg.effectsList;\nvar countedEffects = effectsList.length;\nvar randomNumber = Math.round(Math.random() * countedEffects);\nvar randomEffect = effectsList[randomNumber];\n\nmsg.payload = { \"effect\": randomEffect };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 500,
+        "wires": [
+            [
+                "3581db05c916f4a1"
+            ]
+        ]
+    },
+    {
+        "id": "3581db05c916f4a1",
+        "type": "http request",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http request anime-7",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.192/api/custom?name=anime-7",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 800,
+        "y": 500,
+        "wires": [
+            [
+                "c7d230269521f6f5",
+                "2bd46299b553724e"
+            ]
+        ]
+    },
+    {
+        "id": "c714da089f6ff6ef",
+        "type": "function",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Awtrix Random Anime",
+        "func": "var effectsList = msg.effectsList;\nvar countedEffects = effectsList.length;\nvar randomNumber = Math.round(Math.random() * countedEffects);\nvar randomEffect = effectsList[randomNumber];\n\nmsg.payload = { \"effect\": randomEffect };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 620,
+        "wires": [
+            [
+                "9072166da8071e04"
+            ]
+        ]
+    },
+    {
+        "id": "9072166da8071e04",
+        "type": "http request",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http request anime-9",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.192/api/custom?name=anime-9",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 800,
+        "y": 620,
+        "wires": [
+            [
+                "e0bc8c3ddf95bc31"
+            ]
+        ]
+    },
+    {
+        "id": "c7d230269521f6f5",
+        "type": "debug",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http response anime-7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e0bc8c3ddf95bc31",
+        "type": "debug",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "http response anime-9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "bf1c74914652882f",
+        "type": "delay",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Random Delay",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "3",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 260,
+        "wires": [
+            [
+                "9f744ab053a1214f"
+            ]
+        ]
+    },
+    {
+        "id": "416326d138d212cc",
+        "type": "delay",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Random Delay",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "3",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 380,
+        "wires": [
+            [
+                "739cdc60b9355c6f"
+            ]
+        ]
+    },
+    {
+        "id": "401b2515224d64c8",
+        "type": "delay",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Random Delay",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "3",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 500,
+        "wires": [
+            [
+                "a2070e77b811c524"
+            ]
+        ]
+    },
+    {
+        "id": "2bd46299b553724e",
+        "type": "delay",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Random Delay",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "3",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 620,
+        "wires": [
+            [
+                "c714da089f6ff6ef"
+            ]
+        ]
+    },
+    {
+        "id": "ff4e802609517b4b",
+        "type": "comment",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Show 5 random animations on your Awtrix Light",
+        "info": "Hey dude.  \nYou may see it is a playground there.  \nYou could do awesome things.  \nJust take easy and play whatever you want.",
+        "x": 300,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b803f4e31fae3e86",
+        "type": "function",
+        "z": "52b8ba9ae103ac30",
+        "g": "281657d3e010620c",
+        "name": "Animes List",
+        "func": "msg.effectsList = [\"Fade\", \"MovingLine\", \"BrickBreaker\", \"PingPong\", \"Radar\", \"Checkerboard\", \"Fireworks\", \"PlasmaCloud\", \"Ripple\", \"Snake\", \"Pacifica\", \"TheaterChase\", \"Plasma\", \"Matrix\", \"SwirlIn\", \"SwirlOut\", \"LookingEyes\", \"TwinklingStars\", \"ColorWaves\"];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "a11f44bd025a5890"
+            ]
+        ]
+    }
+]
