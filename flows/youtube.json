@@ -1,51 +1,57 @@
 [
     {
-        "id": "04b1d8bfb8c35838",
+        "id": "79a1d588fb9a84cc",
         "type": "group",
-        "z": "a823e83bee123784",
-        "name": "Youtube Subscriber",
+        "z": "809eb5406b944369",
+        "name": "App: Youtube",
         "style": {
             "label": true
         },
         "nodes": [
-            "9af3a44a96fe0ec2",
-            "62a6741d00f122da",
-            "99a6cef1215cdaea",
-            "d3e6c459070dfbe6",
-            "e93fde625df6e9d3",
-            "235473038f56eb0b"
+            "6d366e235bf5ec13",
+            "87133e269f8de4b0",
+            "7e2cb9773c4c2b9f",
+            "4d837f3b56cf63fc",
+            "fecb80f953bcd6f4",
+            "cb4a8e19cab529db",
+            "5a1799342bd0604e"
         ],
-        "x": 34,
-        "y": 159,
-        "w": 892,
-        "h": 122
+        "x": 14,
+        "y": 919,
+        "w": 992,
+        "h": 202
     },
     {
-        "id": "9af3a44a96fe0ec2",
+        "id": "6d366e235bf5ec13",
         "type": "inject",
-        "z": "a823e83bee123784",
-        "g": "04b1d8bfb8c35838",
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
         "name": "1x/10min",
-        "props": [],
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
         "repeat": "600",
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "topic": "",
-        "x": 140,
-        "y": 240,
+        "topic": "youtube",
+        "x": 120,
+        "y": 1020,
         "wires": [
             [
-                "235473038f56eb0b"
+                "fecb80f953bcd6f4"
             ]
         ]
     },
     {
-        "id": "62a6741d00f122da",
+        "id": "87133e269f8de4b0",
         "type": "http request",
-        "z": "a823e83bee123784",
-        "g": "04b1d8bfb8c35838",
-        "name": "",
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
+        "name": "YouTube API",
         "method": "GET",
         "ret": "obj",
         "paytoqs": "query",
@@ -64,113 +70,115 @@
                 "valueValue": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"
             }
         ],
-        "x": 460,
-        "y": 240,
+        "x": 470,
+        "y": 1020,
         "wires": [
             [
-                "99a6cef1215cdaea"
+                "7e2cb9773c4c2b9f"
             ]
         ]
     },
     {
-        "id": "99a6cef1215cdaea",
+        "id": "7e2cb9773c4c2b9f",
         "type": "function",
-        "z": "a823e83bee123784",
-        "g": "04b1d8bfb8c35838",
-        "name": "parser",
-        "func": "var json = msg.payload;\nvar subscriberCount = String(json.items[0].statistics.subscriberCount);\n\nmsg.payload = {\"text\": subscriberCount, \"icon\": \"youtube\"};\nreturn msg;",
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
+        "name": "Parser",
+        "func": "var statData = msg.payload.items[0].statistics;\nvar subscriberCount = String(statData.subscriberCount);\nvar viewCount = String(statData.viewCount)\n\nmsg.payload = [\n    {\n        \"text\": subscriberCount,\n        \"icon\": \"youtube\",\n        \"duration\": 10\n    },\n    {\n        \"text\": viewCount,\n        \"icon\": \"youtube\",\n        \"color\": \"#00FF00\",\n        \"duration\": 10\n    }\n];\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
-        "y": 240,
+        "x": 650,
+        "y": 1020,
         "wires": [
             [
-                "d3e6c459070dfbe6"
+                "cb4a8e19cab529db"
             ]
         ]
     },
     {
-        "id": "d3e6c459070dfbe6",
-        "type": "mqtt out",
-        "z": "a823e83bee123784",
-        "g": "04b1d8bfb8c35838",
-        "name": "",
-        "topic": "awtrixlight/custom/youtube",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "346df2a95aac5785",
-        "x": 800,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "e93fde625df6e9d3",
+        "id": "4d837f3b56cf63fc",
         "type": "comment",
-        "z": "a823e83bee123784",
-        "g": "04b1d8bfb8c35838",
-        "name": "Youtube Subscriber",
-        "info": "Just enter your **Channel ID** and **Youtube API key** in the **[Data]** node and set your **AWTRIX MQTT** prefix.  \nUses Icon 'youtube'.",
-        "x": 170,
-        "y": 200,
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
+        "name": "Youtube",
+        "info": "Just enter your **Channel ID** and **Youtube API key** in the **[Data]** node.  \nSet IP address of your Awtrix Light in the **_AwtrixLight/Custom_** node.  \nUses Icon 'youtube'.\n",
+        "x": 120,
+        "y": 960,
         "wires": []
     },
     {
-        "id": "235473038f56eb0b",
+        "id": "fecb80f953bcd6f4",
         "type": "function",
-        "z": "a823e83bee123784",
-        "g": "04b1d8bfb8c35838",
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
         "name": "Data",
-        "func": "msg.payload = { \"id\": \"UCdxkMbirTsG0G63x3QUU8rg\", \"key\": \"PUT_YOUR_YOUTUBE_API_KEY_HERE\", \"part\":\"statistics\"}\nreturn msg;",
+        "func": "msg.payload = { \"id\": \"UCdxkMbirTsG0G63x3QUU8rg\", \"key\": \"<<PUT_YOUR_YOUTUBE_API_KEY_HERE>>\", \"part\":\"statistics\"}\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 240,
+        "x": 290,
+        "y": 1020,
         "wires": [
             [
-                "62a6741d00f122da"
+                "87133e269f8de4b0"
             ]
         ]
     },
     {
-        "id": "346df2a95aac5785",
-        "type": "mqtt-broker",
-        "name": "awtrixlight_mqtt_r5s",
-        "broker": "10.10.10.250",
-        "port": "1883",
+        "id": "cb4a8e19cab529db",
+        "type": "http request",
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
+        "name": "AwtrixLight/Custom",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "http://10.10.10.192/api/custom?name=youtube",
         "tls": "",
-        "clientid": "nodered_docker",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "5",
-        "keepalive": "600",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 860,
+        "y": 1020,
+        "wires": [
+            [
+                "5a1799342bd0604e"
+            ]
+        ]
+    },
+    {
+        "id": "5a1799342bd0604e",
+        "type": "debug",
+        "z": "809eb5406b944369",
+        "g": "79a1d588fb9a84cc",
+        "name": "Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 1080,
+        "wires": []
     }
 ]
