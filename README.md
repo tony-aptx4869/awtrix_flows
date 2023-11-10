@@ -5,7 +5,7 @@ Created or modified by [Tony Chang](https://github.com/tony-aptx4869)
 ## Bilibili Live
 `bilibili_live.json`  
 Shows your live viewers or followers count for your Bilibili account.  
-Also views and likes count.
+Also views and likes count.  
 https://flows.blueforcer.de/flow/RJM9oLYlOLzX
 
 ## GitHub
