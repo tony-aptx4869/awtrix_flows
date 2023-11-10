@@ -17,7 +17,9 @@ TODO...
 
 ## Youtube
 `youtube.json`  
-Shows your Youtube channel subscribers count.
+Shows your Youtube channel subscribers count.  
+Also views count.  
+https://flows.blueforcer.de/flow/Xj8YOkPB5Ppx
 
 ## Weather
 `openweather.json`  
